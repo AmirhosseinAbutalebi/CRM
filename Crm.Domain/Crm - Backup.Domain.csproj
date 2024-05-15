@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="TicketAgg\Events\" />
+    <Folder Include="TicketAgg\Repository\" />
+    <Folder Include="TicketDetailAgg\Events\" />
+    <Folder Include="TicketDetailAgg\Enums\" />
+    <Folder Include="TicketDetailAgg\Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+</Project>
