@@ -2,6 +2,7 @@
 using Crm.Query.Tickets.DTOs;
 using Crm.Query.Tickets.GetDetailOfTicket;
 using Crm.Query.Tickets.GetListTicketByUserId;
+using Crm.Query.Tickets.GetListTicketByUserIdReciver;
 using Crm.Query.Tickets.GetStatusTicketByUserId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,16 @@ namespace WebApi.Controllers
         public async Task<TicketDto> GetTicketDetailByUserId(long ticketId)
         {
             return await _mediator.Send(new GetDetailOfTicketQuery(ticketId));
+        }
+        /// <summary>
+        /// get tickets by id user reciver
+        /// </summary>
+        /// <param name="ticketId">with type long</param>
+        /// <returns>ticket dto</returns>
+        [HttpGet("GetTicketsByIdReciver")]
+        public async Task<List<TicketDto>> GetTicketsByUserIdReciver(long userIdReciver)
+        {
+            return await _mediator.Send(new GetListTicketByUserIdReciverQuery(userIdReciver));
         }
     }
 }
