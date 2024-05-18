@@ -1,5 +1,4 @@
-﻿
-using Crm.Infrastructure.Persistent.Ef;
+﻿using Crm.Infrastructure.Persistent.Ef;
 using Crm.Query.Tickets.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

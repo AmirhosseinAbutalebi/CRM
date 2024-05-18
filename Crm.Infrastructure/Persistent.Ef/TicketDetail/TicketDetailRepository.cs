@@ -62,5 +62,10 @@ namespace Crm.Infrastructure.Persistent.Ef.TicketDetail
         {
             return await _context.TicketDetails.FirstOrDefaultAsync(u => u.Id == id);
         }
+
+        public List<Domain.TicketDetailAgg.TicketDetail> GetTickets()
+        {
+            return _context.TicketDetails.ToList();
+        }
     }
 }

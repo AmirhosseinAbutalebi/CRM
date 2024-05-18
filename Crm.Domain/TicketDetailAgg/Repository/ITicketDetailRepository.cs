@@ -36,5 +36,11 @@ namespace Crm.Domain.TicketDetailAgg.Repository
         /// <param name="id">long id for get TicketDetail that we wanna fetch and use in program</param>
         /// <returns>Task of TicketDetail</returns>
         Task<TicketDetail> GetById(long id);
+        /// <summary>
+        /// mehtod GetByTicketId for get TicketDetail with id Ticekt from database
+        /// </summary>
+        /// <param name="id">long id for get TicketDetail that we wanna fetch and use in program</param>
+        /// <returns>List of TicketDetail</returns>
+        List<TicketDetail> GetTickets();
     }
 }

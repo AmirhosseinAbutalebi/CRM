@@ -1,4 +1,6 @@
-﻿using Crm.Domain.TicketDetailAgg.Repository;
+﻿using Crm.Domain.TicketAgg.Repository;
+using Crm.Domain.TicketDetailAgg.Enums;
+using Crm.Domain.TicketDetailAgg.Repository;
 using MediatR;
 
 namespace Crm.Application.TicketDetail.Create
@@ -14,12 +16,17 @@ namespace Crm.Application.TicketDetail.Create
         /// </summary>
         private readonly ITicketDetailRepository _repository;
         /// <summary>
+        /// use Ticket repository
+        /// </summary>
+        private readonly ITicketRepository _ticketrepository;
+        /// <summary>
         /// constructor of CreateTicketDetailCommandHandler
         /// </summary>
         /// <param name="repository">set ticketdetail repository</param>
-        public CreateTicketDetailCommandHandler(ITicketDetailRepository repository)
+        public CreateTicketDetailCommandHandler(ITicketDetailRepository repository, ITicketRepository ticketRepository)
         {
             _repository = repository;
+            _ticketrepository = ticketRepository;
         }
         /// <summary>
         /// infrastructure of command in this method 
@@ -34,6 +41,13 @@ namespace Crm.Application.TicketDetail.Create
                 request.TicketReciver, request.ReadTicket, request.StatusTicket, request.TicketId);
             _repository.Add(ticketDetail);
             await _repository.SaveChanges();
+
+            if(ticketDetail.StatusTicket == StatusTicket.Finished)
+            {
+                var ticketUpdated = _ticketrepository.GetById(ticketDetail.TicketId);
+                ticketUpdated.Result.ChangeStatusTicket(ticketDetail.StatusTicket);
+            }
+            await _ticketrepository.SaveChanges();
         }
     }
 }

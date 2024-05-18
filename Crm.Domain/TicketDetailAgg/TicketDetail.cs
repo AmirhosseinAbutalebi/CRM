@@ -61,5 +61,10 @@ namespace Crm.Domain.TicketDetailAgg
         /// property TicketId and just readonly (private set)
         /// </summary>
         public long TicketId { get; private set; }
+
+        public void ChangeStatusRead(StatusRead statusRead)
+        {
+            ReadTicket = statusRead;
+        }
     }
 }

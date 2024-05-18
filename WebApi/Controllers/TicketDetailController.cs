@@ -1,4 +1,5 @@
 ﻿using Crm.Application.TicketDetail.Create;
+using Crm.Application.TicketDetail.UpdateStatusRead;
 using Crm.Query.TicketDetail.DTOs;
 using Crm.Query.TicketDetail.GetTicketDetailValue;
 using Crm.Query.Users.GetTeacher;
@@ -29,6 +30,18 @@ namespace WebApi.Controllers
         /// <returns>task</returns>
         [HttpPost("AddTicketDetail")]
         public async Task<IActionResult> AddTicketDetail(CreateTicketDetailCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        /// <summary>
+        /// update ticketdetail and change statusread from 0 to 1
+        /// </summary>
+        /// <param name="command">with type UpdateStatusReadTicketDetailCommand</param>
+        /// <returns>task</returns>
+        [HttpPut("UpdateTicketDetailToRead")]
+        public async Task<IActionResult> UpdateTicketDetailToRead(UpdateStatusReadTicketDetailCommand command)
         {
             await _mediator.Send(command);
             return Ok();

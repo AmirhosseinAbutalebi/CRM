@@ -66,5 +66,10 @@ namespace Crm.Domain.TicketAgg
         /// status ticket can be 0 = during and 1 = finished
         /// </summary>
         public StatusTicket StatusTicket { get; private set; }
+
+        public void ChangeStatusTicket(StatusTicket statusTicket)
+        {
+            StatusTicket = statusTicket;
+        }
     }
 }
