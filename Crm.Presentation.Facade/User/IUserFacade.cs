@@ -14,6 +14,12 @@ namespace Crm.Presentation.Facade.User
         /// <returns>userdto</returns>
         Task<UserDto> GetUserByUserName(string username);
         /// <summary>
+        /// get user by id and need long userId 
+        /// </summary>
+        /// <param name="userId">with type long</param>
+        /// <returns>userdto</returns>
+        Task<UserDto> GetUserByUserId(long userId);
+        /// <summary>
         /// get list of teachers
         /// </summary>
         /// <returns>list userdto</returns>

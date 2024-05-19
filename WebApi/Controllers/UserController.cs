@@ -26,6 +26,16 @@ namespace WebApi.Controllers
             return await _userFacade.GetUserByUserName(username);
         }
         /// <summary>
+        /// get user by userId
+        /// </summary>
+        /// <param name="userId">with type long</param>
+        /// <returns>userdto</returns>
+        [HttpGet("GetUserByUserId")]
+        public async Task<UserDto> GetUserByUserId(long userId)
+        {
+            return await _userFacade.GetUserByUserId(userId);
+        }
+        /// <summary>
         /// get list teachers
         /// </summary>
         /// <returns>list userdto</returns>

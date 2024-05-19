@@ -2,6 +2,7 @@
 using Crm.Query.Users.GetByUsername;
 using Crm.Query.Users.GetStudent;
 using Crm.Query.Users.GetTeacher;
+using Crm.Query.Users.GetUserById;
 using Crm.Query.Users.GetUsers;
 using MediatR;
 namespace Crm.Presentation.Facade.User
@@ -51,11 +52,20 @@ namespace Crm.Presentation.Facade.User
         /// <summary>
         /// get user by user name 
         /// </summary>
-        /// <param name="username">with type username</param>
+        /// <param name="username">with type string</param>
         /// <returns>userdto</returns>
         public async Task<UserDto> GetUserByUserName(string username)
         {
             return await _mediator.Send(new GetUserByUsernameQuery(username));
+        }
+        /// <summary>
+        /// get user by user id
+        /// </summary>
+        /// <param name="userId">with type long</param>
+        /// <returns>userdto</returns>
+        public async Task<UserDto> GetUserByUserId(long userId)
+        {
+            return await _mediator.Send(new GetUserByIdQuery(userId));
         }
     }
 }
