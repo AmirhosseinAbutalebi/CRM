@@ -2,7 +2,6 @@
 using Crm.Query.Users.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Query.Users.GetByUsername
 {
     /// <summary>

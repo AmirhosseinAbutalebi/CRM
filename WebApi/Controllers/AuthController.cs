@@ -52,6 +52,7 @@ namespace WebApi.Controllers
                 new Claim("username",user.UserName),
                 new Claim("role",user.Role.ToString()),
                 new Claim("id",user.Id.ToString()),
+                new Claim("FullName", $"{user.FirstName} {user.LastName}"),
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
             };
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtConfig:SignInKey"]));

@@ -1,5 +1,4 @@
 ﻿using Crm.Query.Users.DTOs;
-
 namespace Crm.Query.Users
 {
     /// <summary>

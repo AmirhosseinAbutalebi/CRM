@@ -8,9 +8,12 @@ using Crm.Query.Tickets.GetListTicketByUserIdReciver;
 using Crm.Query.Tickets.GetStatusTicketByUserId;
 using Crm.Query.Tickets.GetStatusTicketByUserIdReciver;
 using MediatR;
-
 namespace Crm.Presentation.Facade.Ticket
 {
+    /// <summary>
+    /// service for TicketFacade and infrastructure it with interface 
+    /// ITicketFacade and for infrastructure need mediatr
+    /// </summary>
     internal class TicketFacade : ITicketFacade
     {
         /// <summary>

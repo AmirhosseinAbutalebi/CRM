@@ -1,5 +1,4 @@
-﻿
-using Crm.Domain.TicketDetailAgg.Enums;
+﻿using Crm.Domain.TicketDetailAgg.Enums;
 using MediatR;
 
 namespace Crm.Application.TicketDetail.Create

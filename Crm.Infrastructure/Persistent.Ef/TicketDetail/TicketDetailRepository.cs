@@ -1,6 +1,5 @@
 ﻿using Crm.Domain.TicketDetailAgg.Repository;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Infrastructure.Persistent.Ef.TicketDetail
 {
     /// <summary>

@@ -2,7 +2,6 @@
 using Crm.Query.Tickets.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Query.Tickets.GetDetailOfTicket
 {
     /// <summary>

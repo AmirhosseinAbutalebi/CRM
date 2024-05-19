@@ -1,8 +1,6 @@
-﻿using Azure.Core;
-using Crm.Domain.UserAgg;
+﻿using Crm.Domain.UserAgg;
 using Crm.Domain.UserAgg.Repository;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Infrastructure.Persistent.Ef.User
 {
     /// <summary>

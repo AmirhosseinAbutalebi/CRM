@@ -1,5 +1,4 @@
 ﻿using MediatR;
-
 namespace Crm.Domain.Shared
 {
     /// <summary>

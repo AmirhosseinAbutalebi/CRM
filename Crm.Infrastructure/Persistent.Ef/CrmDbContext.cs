@@ -1,7 +1,6 @@
 ﻿using Crm.Domain.TicketAgg;
 using Crm.Domain.UserAgg;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Infrastructure.Persistent.Ef
 {
     /// <summary>

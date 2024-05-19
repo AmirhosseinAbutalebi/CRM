@@ -1,5 +1,4 @@
-﻿
-namespace Crm.Domain.UserAgg.Enums
+﻿namespace Crm.Domain.UserAgg.Enums
 {
     /// <summary>
     /// this enum show us user is Teacher or not

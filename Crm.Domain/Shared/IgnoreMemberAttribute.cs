@@ -1,5 +1,4 @@
-﻿
-namespace Crm.Domain.Shared
+﻿namespace Crm.Domain.Shared
 {
     /// <summary>
     /// this class just marker for BaseValueObject

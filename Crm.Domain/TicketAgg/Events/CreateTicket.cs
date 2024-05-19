@@ -1,5 +1,4 @@
 ﻿using Crm.Domain.Shared;
-
 namespace Crm.Domain.TicketAgg.Events
 {
     /// <summary>

@@ -2,7 +2,6 @@
 using Crm.Query.Tickets.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Query.Tickets.GetListTicketByUserIdAndRead
 {
     /// <summary>
@@ -34,9 +33,14 @@ namespace Crm.Query.Tickets.GetListTicketByUserIdAndRead
                 (@$"Select * from Tickets where Id in 
                 (Select TicketId from TicketDetails where 
                 TicketReciver='{userName.UserName}' And ReadTicket=1)");
-            
-            var result = TicketMapper.TicketMapToListDto(tickets.ToList());
 
+            var fullName = userName.FirstName + " " + userName.LastName;
+
+            var result = TicketMapper.TicketMapToListDto(tickets.ToList());
+            foreach (var item in result)
+            {
+                item.FullName = fullName;
+            }
             return result;
         }
     }

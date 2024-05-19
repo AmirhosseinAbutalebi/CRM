@@ -1,5 +1,4 @@
-﻿
-namespace Crm.Query.Tickets.DTOs
+﻿namespace Crm.Query.Tickets.DTOs
 {
     /// <summary>
     /// define dto for use in query
@@ -34,5 +33,9 @@ namespace Crm.Query.Tickets.DTOs
         /// string description for show description ticket
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// add string Fullname for show fullname who send or recive ticket
+        /// </summary>
+        public string FullName { get; set; }
     }
 }

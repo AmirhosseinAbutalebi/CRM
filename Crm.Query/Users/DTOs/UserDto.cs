@@ -1,5 +1,4 @@
 ﻿using Crm.Domain.UserAgg.Enums;
-
 namespace Crm.Query.Users.DTOs
 {
     /// <summary>

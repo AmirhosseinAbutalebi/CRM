@@ -1,5 +1,4 @@
-﻿
-namespace Crm.Domain.TicketDetailAgg.Repository
+﻿namespace Crm.Domain.TicketDetailAgg.Repository
 {
     /// <summary>
     /// in this interface we define method needed in TicketDetailRepository

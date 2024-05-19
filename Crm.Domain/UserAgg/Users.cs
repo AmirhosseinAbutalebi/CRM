@@ -1,6 +1,5 @@
 ﻿using Crm.Domain.Shared;
 using Crm.Domain.UserAgg.Enums;
-
 namespace Crm.Domain.UserAgg
 {
     /// <summary>

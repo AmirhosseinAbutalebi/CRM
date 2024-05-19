@@ -1,5 +1,4 @@
 ﻿using Crm.Domain.TicketDetailAgg.Enums;
-
 namespace Crm.Query.TicketDetail.DTOs
 {
     /// <summary>
@@ -35,5 +34,13 @@ namespace Crm.Query.TicketDetail.DTOs
         /// long id for ticketid
         /// </summary>
         public long TicketId { get; set; }
+        /// <summary>
+        /// string FullNameSender for show name not username in page
+        /// </summary> 
+        public string FullNameSender { get; set; }
+        /// <summary>
+        /// string FullNameReciver for show name not user name in page
+        /// </summary>
+        public string FullNameReciver { get; set; }
     }
 }

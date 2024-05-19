@@ -1,5 +1,4 @@
-﻿
-namespace Crm.Domain.TicketAgg.Repository
+﻿namespace Crm.Domain.TicketAgg.Repository
 {
     /// <summary>
     /// in this interface we define method needed in TicketRepsiotry

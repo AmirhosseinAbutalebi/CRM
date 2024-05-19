@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Crm.Domain.Shared
 {
     /// <summary>

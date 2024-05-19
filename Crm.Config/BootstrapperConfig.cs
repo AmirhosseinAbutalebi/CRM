@@ -19,7 +19,6 @@ using Crm.Infrastructure.Persistent.Ef.TicketDetail;
 using Crm.Application.TicketDetail.Create;
 using Crm.Presentation.Facade;
 
-
 namespace Crm.Config
 {
     /// <summary>

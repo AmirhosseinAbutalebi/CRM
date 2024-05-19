@@ -1,6 +1,5 @@
 ﻿using Crm.Domain.Shared;
 using Crm.Domain.TicketDetailAgg.Enums;
-
 namespace Crm.Domain.TicketDetailAgg
 {
     /// <summary>

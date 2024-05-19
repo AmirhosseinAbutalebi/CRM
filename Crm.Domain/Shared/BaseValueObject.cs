@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-
 namespace Crm.Domain.Shared
 {
     /// <summary>

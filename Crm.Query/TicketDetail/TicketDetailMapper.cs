@@ -1,5 +1,4 @@
 ﻿using Crm.Query.TicketDetail.DTOs;
-
 namespace Crm.Query.TicketDetail
 {
     /// <summary>

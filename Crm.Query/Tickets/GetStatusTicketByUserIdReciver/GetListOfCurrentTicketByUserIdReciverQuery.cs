@@ -1,6 +1,5 @@
 ﻿using Crm.Query.Tickets.DTOs;
 using MediatR;
-
 namespace Crm.Query.Tickets.GetStatusTicketByUserIdReciver
 {
     /// <summary>
@@ -9,5 +8,4 @@ namespace Crm.Query.Tickets.GetStatusTicketByUserIdReciver
     /// </summary>
     /// <param name="UserId">long User id </param>
     public record GetListOfCurrentTicketByUserIdReciverQuery(long UserId) : IRequest<List<TicketDto>>;
-
 }

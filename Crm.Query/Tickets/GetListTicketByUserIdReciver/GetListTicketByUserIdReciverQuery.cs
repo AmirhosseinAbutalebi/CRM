@@ -1,6 +1,5 @@
 ﻿using Crm.Query.Tickets.DTOs;
 using MediatR;
-
 namespace Crm.Query.Tickets.GetListTicketByUserIdReciver
 {
     // <summary>

@@ -1,6 +1,5 @@
 ﻿using Crm.Query.TicketDetail.DTOs;
 using MediatR;
-
 namespace Crm.Query.TicketDetail.GetTicketDetailValue
 {
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿using Crm.Application.Ticket.Create;
 using Crm.Query.Tickets.DTOs;
-
 namespace Crm.Presentation.Facade.Ticket
 {
     /// <summary>

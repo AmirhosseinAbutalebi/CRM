@@ -1,7 +1,4 @@
-﻿
-using Crm.Domain.TicketDetailAgg;
-
-namespace Crm.Domain.UserAgg.Repository
+﻿namespace Crm.Domain.UserAgg.Repository
 {
     /// <summary>
     /// in this interface we define method needed in UserRepository

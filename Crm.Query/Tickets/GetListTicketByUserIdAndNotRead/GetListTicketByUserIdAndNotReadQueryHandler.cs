@@ -2,7 +2,6 @@
 using Crm.Query.Tickets.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 namespace Crm.Query.Tickets.GetListTicketByUserIdAndNotRead
 {
     /// <summary>
@@ -35,8 +34,13 @@ namespace Crm.Query.Tickets.GetListTicketByUserIdAndNotRead
                 (Select TicketId from TicketDetails where 
                 TicketReciver='{userName.UserName}' And ReadTicket=0)");
 
-            var result = TicketMapper.TicketMapToListDto(tickets.ToList());
+            var fullName = userName.FirstName + " " + userName.LastName;
 
+            var result = TicketMapper.TicketMapToListDto(tickets.ToList());
+            foreach (var item in result)
+            {
+                item.FullName = fullName;
+            }
             return result;
         }
     }
