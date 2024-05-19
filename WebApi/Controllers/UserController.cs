@@ -1,9 +1,5 @@
+using Crm.Presentation.Facade.User;
 using Crm.Query.Users.DTOs;
-using Crm.Query.Users.GetByUsername;
-using Crm.Query.Users.GetStudent;
-using Crm.Query.Users.GetTeacher;
-using Crm.Query.Users.GetUsers;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -12,17 +8,13 @@ namespace WebApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        /// <summary>
-        /// use IMediator in project and just define IMediator and use with send command
-        /// </summary>
-        private readonly IMediator _mediator;
-        /// <summary>
-        /// constructor TicketController
-        /// </summary>
-        public UserController(IMediator mediator)
+        private readonly IUserFacade _userFacade;
+
+        public UserController(IUserFacade userFacade)
         {
-            _mediator = mediator;
+            _userFacade = userFacade;
         }
+
         /// <summary>
         /// get user by username
         /// </summary>
@@ -31,7 +23,7 @@ namespace WebApi.Controllers
         [HttpGet("GetUserByUsername")]
         public async Task<UserDto> GetUserByUserName(string username)
         {
-            return await _mediator.Send(new GetUserByUsernameQuery(username));
+            return await _userFacade.GetUserByUserName(username);
         }
         /// <summary>
         /// get list teachers
@@ -40,7 +32,7 @@ namespace WebApi.Controllers
         [HttpGet("GetListTeacher")]
         public async Task<List<UserDto>> GetTeachers()
         {
-            return await _mediator.Send(new GetTeacherQuery());
+            return await _userFacade.GetTeachers();
         }
         /// <summary>
         /// get list students
@@ -49,7 +41,7 @@ namespace WebApi.Controllers
         [HttpGet("GetListStudent")]
         public async Task<List<UserDto>> GetStudents()
         {
-            return await _mediator.Send(new GetStudentQuery());
+            return await _userFacade.GetStudents();
         }
         /// <summary>
         /// get list users
@@ -58,7 +50,7 @@ namespace WebApi.Controllers
         [HttpGet("GetListUsers")]
         public async Task<List<UserDto>> GetAll()
         {
-            return await _mediator.Send(new GetUsersQuery());
+            return await _userFacade.GetAll();
         }
     }
 }

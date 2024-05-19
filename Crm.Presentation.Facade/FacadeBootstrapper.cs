@@ -1,5 +1,6 @@
 ﻿using Crm.Presentation.Facade.Ticket;
 using Crm.Presentation.Facade.TicketDetail;
+using Crm.Presentation.Facade.User;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Crm.Presentation.Facade
@@ -10,6 +11,7 @@ namespace Crm.Presentation.Facade
         {
             services.AddScoped<ITicketFacade, TicketFacade>();
             services.AddScoped<ITicketDetailFacade, TicketDetailFacade>();
+            services.AddScoped<IUserFacade, UserFacade>();
         }
     }
 }
