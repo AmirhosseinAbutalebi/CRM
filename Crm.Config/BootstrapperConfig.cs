@@ -17,6 +17,7 @@ using Crm.Infrastructure.Persistent.Ef.Ticket;
 using Crm.Domain.TicketDetailAgg.Repository;
 using Crm.Infrastructure.Persistent.Ef.TicketDetail;
 using Crm.Application.TicketDetail.Create;
+using Crm.Presentation.Facade;
 
 
 namespace Crm.Config
@@ -37,19 +38,23 @@ namespace Crm.Config
             service.AddTransient<IUserRepository, UserRepository>();
             service.AddTransient<ITicketRepository, TicketRepository>();
             service.AddTransient<ITicketDetailRepository, TicketDetailRepository>();
+
             service.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(GetUserByUsernameQuery).Assembly));
             service.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssembly(typeof(CreateTicketCommand).Assembly));
-            service.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(CreateTicketDetailCommand).Assembly));
+
             service.AddDbContext<CrmDbContext>(option =>
             {
                 option.UseSqlServer(connectionString);
             });
             service.AddValidatorsFromAssembly(typeof(CreateTicketCommandValidator).Assembly);
+
             service.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
+
+            service.FacadeDependency();
         }
+
         /// <summary>
         /// for set jwt and config in this project 
         /// </summary>

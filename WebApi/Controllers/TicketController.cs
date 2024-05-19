@@ -1,13 +1,6 @@
 ﻿using Crm.Application.Ticket.Create;
+using Crm.Presentation.Facade.Ticket;
 using Crm.Query.Tickets.DTOs;
-using Crm.Query.Tickets.GetDetailOfTicket;
-using Crm.Query.Tickets.GetListTicketByUserId;
-using Crm.Query.Tickets.GetListTicketByUserIdAndNotRead;
-using Crm.Query.Tickets.GetListTicketByUserIdAndRead;
-using Crm.Query.Tickets.GetListTicketByUserIdReciver;
-using Crm.Query.Tickets.GetStatusTicketByUserId;
-using Crm.Query.Tickets.GetStatusTicketByUserIdReciver;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -17,15 +10,16 @@ namespace WebApi.Controllers
     public class TicketController : ControllerBase
     {
         /// <summary>
-        /// use IMediator in project and just define IMediator and use with send command
+        /// add ticketfacde till use pattern design
         /// </summary>
-        private readonly IMediator _mediator;
+        private readonly ITicketFacade _ticketFacade;
         /// <summary>
-        /// constructor TicketController
+        /// constructor ticketcontroller
         /// </summary>
-        public TicketController(IMediator mediator)
+        /// <param name="ticketFacade"> with type Iticketfacade</param>
+        public TicketController(ITicketFacade ticketFacade)
         {
-            _mediator = mediator;
+            _ticketFacade = ticketFacade;
         }
 
         /// <summary>
@@ -36,7 +30,7 @@ namespace WebApi.Controllers
         [HttpPost("AddTicket")]
         public async Task<IActionResult> AddTicket(CreateTicketCommand command)
         {
-            await _mediator.Send(command);
+            await _ticketFacade.AddTicket(command);
             return Ok();
         }
         /// <summary>
@@ -47,7 +41,7 @@ namespace WebApi.Controllers
         [HttpGet("GetTicketsByIdSender")]
         public async Task<List<TicketDto>> GetTicketByUserId(long userId)
         {
-            return await _mediator.Send(new GetListTicketByUserIdQuery(userId));
+            return await _ticketFacade.GetTicketByUserId(userId);
         }
         /// <summary>
         /// get ticket that during
@@ -57,7 +51,7 @@ namespace WebApi.Controllers
         [HttpGet("GetCurrentTicketsByIdSender")]
         public async Task<List<TicketDto>> GetCurrentTicketByUserIdSender(long userId)
         {
-            return await _mediator.Send(new GetListOfCurrentTicketByUserIdQuery(userId));
+            return await _ticketFacade.GetCurrentTicketByUserIdSender(userId);
         }
         /// <summary>
         /// get tickets that finished
@@ -67,12 +61,18 @@ namespace WebApi.Controllers
         [HttpGet("GetFinishedTicketsByIdSender")]
         public async Task<List<TicketDto>> GetFinishedTicketByUserIdSender(long userId)
         {
-            return await _mediator.Send(new GetListOfFinishedTicketByUserIdQuery(userId));
+            return await _ticketFacade.GetFinishedTicketByUserIdSender(userId);
         }
+
+        /// <summary>
+        /// get tickets not finished with user id reciver
+        /// </summary>
+        /// <param name="userId">with type long</param>
+        /// <returns>list ticket dto</returns>
         [HttpGet("GetCurrentTicketsByIdReciver")]
         public async Task<List<TicketDto>> GetCurrentTicketByUserIdReciver(long userId)
         {
-            return await _mediator.Send(new GetListOfCurrentTicketByUserIdReciverQuery(userId));
+            return await _ticketFacade.GetCurrentTicketByUserIdReciver(userId);
         }
         /// <summary>
         /// get tickets that finished
@@ -82,7 +82,7 @@ namespace WebApi.Controllers
         [HttpGet("GetFinishedTicketsByIdReciver")]
         public async Task<List<TicketDto>> GetFinishedTicketByUserIdReciver(long userId)
         {
-            return await _mediator.Send(new GetListOfFinishedTicketByUserIdReciverQuery(userId));
+            return await _ticketFacade.GetFinishedTicketByUserIdReciver(userId);
         }
         /// <summary>
         /// get ticketdetail by id
@@ -92,7 +92,7 @@ namespace WebApi.Controllers
         [HttpGet("GetTicketDetailById")]
         public async Task<TicketDto> GetTicketDetailByUserId(long ticketId)
         {
-            return await _mediator.Send(new GetDetailOfTicketQuery(ticketId));
+            return await _ticketFacade.GetTicketDetailByUserId(ticketId);
         }
         /// <summary>
         /// get tickets by id user reciver
@@ -102,7 +102,7 @@ namespace WebApi.Controllers
         [HttpGet("GetTicketsByIdReciver")]
         public async Task<List<TicketDto>> GetTicketsByUserIdReciver(long userIdReciver)
         {
-            return await _mediator.Send(new GetListTicketByUserIdReciverQuery(userIdReciver));
+            return await _ticketFacade.GetTicketsByUserIdReciver(userIdReciver);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace WebApi.Controllers
         [HttpGet("GetTicketsByIdAndRead")]
         public async Task<List<TicketDto>> GetTicketsByUserIdAndRead(long userId)
         {
-            return await _mediator.Send(new GetListTicketByUserIdAndReadQuery(userId));
+            return await _ticketFacade.GetTicketsByUserIdAndRead(userId);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace WebApi.Controllers
         [HttpGet("GetTicketsByIdAndDontRead")]
         public async Task<List<TicketDto>> GetTicketsByUserIdAndDontRead(long userId)
         {
-            return await _mediator.Send(new GetListTicketByUserIdAndNotReadQuery(userId));
+            return await _ticketFacade.GetTicketsByUserIdAndDontRead(userId);
         }
     }
 }

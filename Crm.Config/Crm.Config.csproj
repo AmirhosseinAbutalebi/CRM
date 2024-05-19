@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Crm.Query\Crm.Query.csproj" />
+    <ProjectReference Include="..\Crm.Presentation.Facade\Crm.Presentation.Facade.csproj" />
   </ItemGroup>
 
 </Project>
