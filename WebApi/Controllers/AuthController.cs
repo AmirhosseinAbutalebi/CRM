@@ -13,31 +13,14 @@ namespace WebApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        /// <summary>
-        /// use IMediator in project and just define IMediator and use with send command
-        /// </summary>
         private readonly IMediator _mediator;
-        /// <summary>
-        /// use IConfiguration for set jwt token
-        /// </summary>
         private readonly IConfiguration _configuration;
-        /// <summary>
-        /// constructor controller for define properties
-        /// </summary>
         public AuthController(IMediator mediator, IConfiguration configuration)
         {
             _mediator = mediator;
             _configuration = configuration;
         }
 
-        /// <summary>
-        /// login controller that be use and use jwt 
-        /// first check username exist or not 
-        /// then check password correct or not
-        /// claim jwt with username and role and id
-        /// </summary>
-        /// <param name="view">type loginviewmodel with parameter username and password</param>
-        /// <returns>jwt token</returns>
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginViewModel view)
         {

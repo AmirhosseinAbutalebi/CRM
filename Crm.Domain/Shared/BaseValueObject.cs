@@ -1,10 +1,7 @@
 ﻿using System.Reflection;
 namespace Crm.Domain.Shared
 {
-    /// <summary>
-    /// Define BaseValueObject for valueobjects need in project that inhert from IEquatable
-    /// this project we dont have value object but define this class if needed in future
-    /// </summary>
+    
     public abstract class BaseValueObject : IEquatable<BaseValueObject>
     {
         private List<PropertyInfo> properties;

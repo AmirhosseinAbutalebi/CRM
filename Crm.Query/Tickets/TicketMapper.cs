@@ -1,9 +1,6 @@
 ﻿using Crm.Query.Tickets.DTOs;
 namespace Crm.Query.Tickets
 {
-    /// <summary>
-    /// just map from Tickets to ticketDto and you can use mapper or autofac for this 
-    /// </summary>
     public class TicketMapper
     {
         public static List<TicketDto> TicketMapToListDto(List<Domain.TicketAgg.Tickets> tickets)
@@ -17,9 +14,8 @@ namespace Crm.Query.Tickets
                 Description = x.Description,
                 Title = x.Title,
                 UserIdSender = x.UserIdSender,
-                UsernameReciver = x.UsernameReciver,
                 UserIdReciver = x.UserIdReciver,
-                UsernameSender = x.UsernameSender,
+                statusticket = x.StatusTicket
                 
             }).ToList();
 
@@ -37,9 +33,8 @@ namespace Crm.Query.Tickets
                 Description = tickets.Description,
                 Title = tickets.Title,
                 UserIdSender = tickets.UserIdSender,
-                UsernameReciver = tickets.UsernameReciver,
                 UserIdReciver = tickets.UserIdReciver,
-                UsernameSender = tickets.UsernameSender,
+                statusticket = tickets.StatusTicket
             };
         }
     }

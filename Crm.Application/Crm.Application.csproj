@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Crm.Domain\Crm.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="User\" />
-  </ItemGroup>
-
 </Project>

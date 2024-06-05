@@ -50,54 +50,9 @@ namespace Crm.Infrastructure.Migrations
                     b.Property<long>("UserIdSender")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("UsernameReciver")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsernameSender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("Crm.Domain.TicketDetailAgg.TicketDetail", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReadTicket")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StatusTicket")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("TicketId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TicketReciver")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TicketSender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TicketDetails");
+                    b.ToTable("Tickets", "ticket");
                 });
 
             modelBuilder.Entity("Crm.Domain.UserAgg.Users", b =>
@@ -132,7 +87,50 @@ namespace Crm.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "user");
+                });
+
+            modelBuilder.Entity("Crm.Domain.TicketAgg.Tickets", b =>
+                {
+                    b.OwnsMany("Crm.Domain.TicketAgg.TicketDetail", "Items", b1 =>
+                        {
+                            b1.Property<long>("TicketsId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<long>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"));
+
+                            b1.Property<DateTime>("CreationDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<int>("ReadTicket")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("StatusTicket")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Text")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<long>("TicketReciverId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<long>("TicketSenderId")
+                                .HasColumnType("bigint");
+
+                            b1.HasKey("TicketsId", "Id");
+
+                            b1.ToTable("TicketDetails", "ticket");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TicketsId");
+                        });
+
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

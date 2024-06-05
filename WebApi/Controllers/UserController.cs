@@ -14,49 +14,21 @@ namespace WebApi.Controllers
         {
             _userFacade = userFacade;
         }
-
-        /// <summary>
-        /// get user by username
-        /// </summary>
-        /// <param name="username">with type string</param>
-        /// <returns>userdto</returns>
-        [HttpGet("GetUserByUsername")]
-        public async Task<UserDto> GetUserByUserName(string username)
-        {
-            return await _userFacade.GetUserByUserName(username);
-        }
-        /// <summary>
-        /// get user by userId
-        /// </summary>
-        /// <param name="userId">with type long</param>
-        /// <returns>userdto</returns>
         [HttpGet("GetUserByUserId")]
         public async Task<UserDto> GetUserByUserId(long userId)
         {
             return await _userFacade.GetUserByUserId(userId);
         }
-        /// <summary>
-        /// get list teachers
-        /// </summary>
-        /// <returns>list userdto</returns>
         [HttpGet("GetListTeacher")]
         public async Task<List<UserDto>> GetTeachers()
         {
             return await _userFacade.GetTeachers();
         }
-        /// <summary>
-        /// get list students
-        /// </summary>
-        /// <returns>list userdto</returns>
         [HttpGet("GetListStudent")]
         public async Task<List<UserDto>> GetStudents()
         {
             return await _userFacade.GetStudents();
         }
-        /// <summary>
-        /// get list users
-        /// </summary>
-        /// <returns>list userdto</returns>
         [HttpGet("GetListUsers")]
         public async Task<List<UserDto>> GetAll()
         {

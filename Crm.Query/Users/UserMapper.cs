@@ -1,9 +1,6 @@
 ﻿using Crm.Query.Users.DTOs;
 namespace Crm.Query.Users
 {
-    /// <summary>
-    /// just map from Users to userdto and you can use mapper or autofac for this 
-    /// </summary>
     public class UserMapper
     {
         public static UserDto UserMapToDto(Domain.UserAgg.Users users)

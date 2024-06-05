@@ -4,11 +4,6 @@ using System.Text;
 
 namespace Crm.Application.Shared
 {
-    /// <summary>
-    /// for set validation in project with piplinebehavior
-    /// </summary>
-    /// <typeparam name="TRequest">generic type of request validator</typeparam>
-    /// <typeparam name="TResponse">generic type of response validator</typeparam>
     public class CommandValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validator;
