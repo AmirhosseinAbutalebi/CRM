@@ -1,11 +1,8 @@
-﻿using Crm.Domain.TicketAgg;
-using Crm.Infrastructure.Persistent.Dapper;
+﻿using Crm.Infrastructure.Persistent.Dapper;
 using Crm.Infrastructure.Persistent.Ef;
 using Crm.Query.TicketDetail.DTOs;
 using Dapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 namespace Crm.Query.TicketDetail.GetTicketDetailValue
 {
     public class GetListTicketDetailValueQueryHandler : IRequestHandler<GetListTicketDetailValueQuery, List<TicketDetailDto>>
