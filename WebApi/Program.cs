@@ -1,6 +1,7 @@
 using Crm.Config;
 
 var builder = WebApplication.CreateBuilder(args);
+
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddCors(options =>
@@ -29,14 +30,11 @@ BootstrapperConfig.AuthenticationJWT(builder);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-//app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseHttpsRedirection();
 app.UseCors("myPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
