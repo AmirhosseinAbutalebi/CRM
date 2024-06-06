@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> AddTicket(CreateTicketCommand command)
         {
             await _ticketFacade.AddTicket(command);
-            return Ok();
+            return Ok("تیکت با موفقیت ایجاد شد");
         }
         [HttpGet("GetTicketsByIdSender")]
         public async Task<List<TicketDto>> GetTicketByUserId(long userId)

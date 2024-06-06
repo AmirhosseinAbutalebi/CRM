@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> AddTicketDetail(CreateTicketDetailCommand command)
         {
             await _ticketDetailFacade.AddTicketDetail(command);
-            return Ok();
+            return Ok("تیکت جدید ثبت شد");
         }
         [HttpPut("UpdateTicketDetailToRead")]
         public async Task<IActionResult> UpdateTicketDetailToRead(UpdateStatusReadTicketDetailCommand command)

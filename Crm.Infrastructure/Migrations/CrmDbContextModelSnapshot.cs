@@ -92,7 +92,7 @@ namespace Crm.Infrastructure.Migrations
 
             modelBuilder.Entity("Crm.Domain.TicketAgg.Tickets", b =>
                 {
-                    b.OwnsMany("Crm.Domain.TicketAgg.TicketDetail", "Items", b1 =>
+                    b.OwnsMany("Crm.Domain.TicketAgg.Tickets.Items#Crm.Domain.TicketAgg.TicketDetail", "Items", b1 =>
                         {
                             b1.Property<long>("TicketsId")
                                 .HasColumnType("bigint");

@@ -1,10 +1,11 @@
-﻿using Crm.Domain.Shared;
-using Crm.Domain.UserAgg.Enums;
-namespace Crm.Domain.UserAgg
+﻿using Crm.Domain.UserAgg.Enums;
+using MediatR;
+
+namespace Crm.Application.User.Register
 {
-    public class Users : AggregateRoot
+    public class RegisterUserCommand : IRequest
     {
-        public Users(string userName, string password, string firstName, string lastName, LevelUser role)
+        public RegisterUserCommand(string userName, string password, string firstName, string lastName, LevelUser role)
         {
             UserName = userName;
             Password = password;
@@ -12,15 +13,10 @@ namespace Crm.Domain.UserAgg
             LastName = lastName;
             Role = role;
         }
-        private Users()
-        {
-
-        }
         public string UserName { get; private set; }
         public string Password { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public LevelUser Role { get; private set; }
-
     }
 }

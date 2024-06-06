@@ -51,6 +51,7 @@ namespace Crm.Config
                     ValidateIssuerSigningKey = true,
                     ValidateAudience = true
                 };
+                option.SaveToken = true;
             });
         }
     }

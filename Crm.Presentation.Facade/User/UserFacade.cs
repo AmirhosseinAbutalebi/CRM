@@ -1,5 +1,5 @@
-﻿using Crm.Query.Users.DTOs;
-using Crm.Query.Users.GetByUsername;
+﻿using Crm.Application.User.Register;
+using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetStudent;
 using Crm.Query.Users.GetTeacher;
 using Crm.Query.Users.GetUserById;
@@ -15,6 +15,12 @@ namespace Crm.Presentation.Facade.User
         {
             _mediator = mediator;
         }
+
+        public async Task RegisterUser(RegisterUserCommand user)
+        {
+            await _mediator.Send(user);
+        }
+
         public async Task<List<UserDto>> GetAll()
         {
             return await _mediator.Send(new GetUsersQuery());
