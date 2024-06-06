@@ -19,8 +19,8 @@ namespace Crm.Query.Tickets.GetListTicketByUserIdAndNotRead
             var userName = _context.Users.FirstOrDefault(r => r.Id == request.UserId);
 
             using var connection = _dapperContext.CreateConnection();
-            var sql = @$"Select * from [ticket].[Tickets] where Id in 
-                (Select TicketsId from [ticket].[TicketDetails] where 
+            var sql = @$"Select * from {_dapperContext.Ticket} where Id in 
+                (Select TicketsId from {_dapperContext.TicketDetail} where 
                 TicketReciverId=@id And ReadTicket=0)";
             var tickets = await connection.QueryAsync<TicketDto>(sql, new { id = userName.Id });
             var result = tickets.ToList();

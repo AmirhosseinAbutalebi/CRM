@@ -5,6 +5,7 @@ using Crm.Query.TicketDetail.DTOs;
 using Dapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 namespace Crm.Query.TicketDetail.GetTicketDetailValue
 {
     public class GetListTicketDetailValueQueryHandler : IRequestHandler<GetListTicketDetailValueQuery, List<TicketDetailDto>>
@@ -22,45 +23,27 @@ namespace Crm.Query.TicketDetail.GetTicketDetailValue
             using var connection = _dapperContext.CreateConnection();
             var sql = $"select * from {_dapperContext.TicketDetail} where TicketsId = @id";
             var ticketDetail = await connection.QueryAsync<TicketDetailDto>(sql, new {id = request.TicketId});
-           
-            var sender = new List<long>();
-            var reciver = new List<long>();
-
-            foreach (var item in ticketDetail)
-            {
-                sender.Add(item.TicketSenderId);
-                reciver.Add(item.TicketReciverId);
-            }
 
 
+            var sqlSender = @$"select FirstName + ' ' + LastName as Fullname from {_dapperContext.TicketDetail}
+                    inner join {_dapperContext.User} on
+                    {_dapperContext.TicketDetail}.TicketSenderId = {_dapperContext.User}.Id";
 
-            var fullnameSender = new List<string>();
-            var fullnameReciver = new List<string>();
+            var senderUsers = await connection.QueryAsync<string>(sqlSender);
+            
 
-            var resu = _context.Users.ToList();
+            var sqlReciver = @$"select FirstName + ' ' + LastName as Fullname from {_dapperContext.TicketDetail}
+                    inner join {_dapperContext.User} on
+                    {_dapperContext.TicketDetail}.TicketReciverId = {_dapperContext.User}.Id";
 
-            foreach (var item in resu)
-            {
-                foreach (var user in sender)
-                {
-                    if(item.Id == user)
-                    {
-                        fullnameSender.Add(item.FirstName+" "+item.LastName);
-                    }
-                }
-                foreach (var user in reciver)
-                {
-                    if (item.Id == user)
-                    {
-                        fullnameReciver.Add(item.FirstName + " " + item.LastName);
-                    }
-                }
-            }
+            var reciverUsers = await connection.QueryAsync<string>(sqlReciver);
 
-            fullnameSender.Reverse();
 
+            var fullnameSender = senderUsers.ToList();
+            var fullnameReciver =  reciverUsers.ToList();
+            
             var counter = 0;
-            foreach(var item in ticketDetail)
+            foreach (var item in ticketDetail)
             {
                 item.FullNameSender = fullnameSender[counter];
                 item.FullNameReciver = fullnameReciver[counter];
