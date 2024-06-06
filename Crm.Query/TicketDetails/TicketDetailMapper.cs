@@ -11,7 +11,7 @@ namespace Crm.Query.TicketDetail
             return new TicketDetailDto()
             {
                 Id = ticket.Id,
-                TicketId = ticket.TicketsId,
+                TicketsId = ticket.TicketsId,
                 Text = ticket.Text,
                 StatusTicket = ticket.StatusTicket,
                 ReadTicket = ticket.ReadTicket,
@@ -28,7 +28,7 @@ namespace Crm.Query.TicketDetail
             var listTicket = tickets.Select(x => new TicketDetailDto()
             {
                 Id = x.Id,
-                TicketId = x.TicketsId,
+                TicketsId = x.TicketsId,
                 Text = x.Text,
                 StatusTicket = x.StatusTicket,
                 ReadTicket = x.ReadTicket,

@@ -24,16 +24,18 @@ namespace Crm.Query.TicketDetail.GetTicketDetailValue
 
             var sqlSender = @$"select FirstName + ' ' + LastName as Fullname from {_dapperContext.TicketDetail}
                     inner join {_dapperContext.User} on
-                    {_dapperContext.TicketDetail}.TicketSenderId = {_dapperContext.User}.Id";
+                    {_dapperContext.TicketDetail}.TicketSenderId = {_dapperContext.User}.Id
+                    where TicketsId = @id";
 
-            var senderUsers = await connection.QueryAsync<string>(sqlSender);
+            var senderUsers = await connection.QueryAsync<string>(sqlSender, new { id = request.TicketId });
             
 
             var sqlReciver = @$"select FirstName + ' ' + LastName as Fullname from {_dapperContext.TicketDetail}
                     inner join {_dapperContext.User} on
-                    {_dapperContext.TicketDetail}.TicketReciverId = {_dapperContext.User}.Id";
+                    {_dapperContext.TicketDetail}.TicketReciverId = {_dapperContext.User}.Id
+                    where TicketsId = @id";
 
-            var reciverUsers = await connection.QueryAsync<string>(sqlReciver);
+            var reciverUsers = await connection.QueryAsync<string>(sqlReciver, new { id = request.TicketId });
 
 
             var fullnameSender = senderUsers.ToList();

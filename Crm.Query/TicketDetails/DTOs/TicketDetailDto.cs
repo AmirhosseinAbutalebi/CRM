@@ -10,7 +10,7 @@ namespace Crm.Query.TicketDetail.DTOs
         public long TicketReciverId { get; set; }
         public StatusRead ReadTicket { get; set; }
         public StatusTicket StatusTicket { get; set; }
-        public long TicketId { get; set; }
+        public long TicketsId { get; set; }
         public string? FullNameSender { get; set; }
         public string? FullNameReciver { get; set; }
     }
