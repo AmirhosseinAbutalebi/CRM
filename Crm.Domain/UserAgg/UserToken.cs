@@ -4,6 +4,10 @@ namespace Crm.Domain.UserAgg
 {
     public class UserToken:BaseEntity
     {
+        private UserToken()
+        {
+            
+        }
         public UserToken(string hashJwtToken, string hashRefreshToken, DateTime expireToken, DateTime expireRefreshToken, string device)
         {
             Guard(hashJwtToken, hashRefreshToken, expireToken, expireRefreshToken, device);

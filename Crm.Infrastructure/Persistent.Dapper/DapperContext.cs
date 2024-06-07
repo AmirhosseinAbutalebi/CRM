@@ -13,8 +13,10 @@ namespace Crm.Infrastructure.Persistent.Dapper
         }
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
 
+        public string Ticket => "[ticket].Tickets";
         public string TicketDetail => "[ticket].TicketDetails";
         public string User => "[user].Users";
-        public string Ticket => "[ticket].Tickets";
+        public string UserToken => "[user].UserTokens";
+        
     }
 }

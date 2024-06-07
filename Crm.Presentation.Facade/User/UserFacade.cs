@@ -1,10 +1,13 @@
-﻿using Crm.Application.User.AddToken;
+﻿using Crm.Application.Shared;
+using Crm.Application.User.AddToken;
 using Crm.Application.User.Register;
+using Crm.Application.User.RemoveToken;
 using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetStudent;
 using Crm.Query.Users.GetTeacher;
 using Crm.Query.Users.GetUserById;
 using Crm.Query.Users.GetUsers;
+using Crm.Query.Users.UserToken;
 using MediatR;
 namespace Crm.Presentation.Facade.User
 {
@@ -25,6 +28,10 @@ namespace Crm.Presentation.Facade.User
         {
             await _mediator.Send(token);
         }
+        public async Task RemoveUserToken(RemoveTokenCommand token)
+        {
+            await _mediator.Send(token);
+        }
 
         public async Task<List<UserDto>> GetAll()
         {
@@ -41,6 +48,12 @@ namespace Crm.Presentation.Facade.User
         public async Task<UserDto> GetUserByUserId(long userId)
         {
             return await _mediator.Send(new GetUserByIdQuery(userId));
+        }
+
+        public async Task<UserTokenDto> GetUserByRefreshToken(string refreshToken)
+        {
+            var hashRefreshToken = Sha256Hash.Hash(refreshToken);
+            return await _mediator.Send(new GetUserTokenByRefreshTokenQuery(hashRefreshToken));
         }
     }
 }

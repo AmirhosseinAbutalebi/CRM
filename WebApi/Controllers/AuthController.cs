@@ -9,6 +9,9 @@ using WebApi.Common.ResultDto;
 using Crm.Application.Shared;
 using Crm.Application.User.AddToken;
 using WebApi.Common.GetDevice;
+using Crm.Application.User.RemoveToken;
+using Crm.Query.Users.DTOs;
+using Crm.Query.Users.GetUserById;
 
 namespace WebApi.Controllers
 {
@@ -40,30 +43,7 @@ namespace WebApi.Controllers
             if (Sha256Hash.IsCompare(user.Password, view.Password) == false)
                 return NotFound("کاربری با مشخصات وارد شده یافت نشد");
 
-            var token = JwtTokenBuilder.BuildToken(user, _configuration);
-            var resfreshToken = Guid.NewGuid().ToString();
-
-            var hashToken = Sha256Hash.Hash(token);
-            var hashRefreshToken = Sha256Hash.Hash(resfreshToken);
-
-            var device = GetUserDevice.DeviceName(HttpContext.Request.Headers["user-agent"]);
-
-            var command = new AddTokenCommand(user.Id, hashToken, hashRefreshToken, DateTime.Now.AddDays(7),
-                DateTime.Now.AddDays(8), device);
-
-            try
-            {
-                await _userFacade.AddUserToken(command);
-            }
-            catch 
-            {
-                return BadRequest("تعداد ورود بیشتر از ۴ می باشد لطفا با یک کاربر خروج نماید");
-            }
-            var result = new LoginResultDto()
-            {
-                RefreshToken = resfreshToken,
-                Token = token
-            };
+            var result = await AddTokenAndGenerateJwtToken(user);
 
             return Ok(result);
         }
@@ -80,5 +60,63 @@ namespace WebApi.Controllers
             await _userFacade.RegisterUser(command);
             return Ok("کاربر با موفقیت ایجاد شد");
         }
+
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody]string refreshToken)
+        {
+            
+            var result = await _userFacade.GetUserByRefreshToken(refreshToken);
+
+            if (result == null)
+                return NotFound("چنین توکنی یافت نشد");
+
+            if (result.ExpireToken > DateTime.Now)
+                return BadRequest("توکن هنوز منقضی نشده است");
+
+            if (result.ExpireRefreshToken < DateTime.Now)
+                return BadRequest("زمان رفرش توکن تمام شده است مجددا ورود نماید");
+
+            var user = await _mediator.Send(new GetUserByIdQuery(result.UsersId));
+
+            var token = new RemoveTokenCommand(result.UsersId, result.Id);
+
+            await _userFacade.RemoveUserToken(token);
+
+            var loginResult = await AddTokenAndGenerateJwtToken(user);
+
+            return Ok(loginResult);
+
+        }
+        private async Task<LoginResultDto> AddTokenAndGenerateJwtToken(UserDto user)
+        {
+            var token = JwtTokenBuilder.BuildToken(user, _configuration);
+            var resfreshToken = Guid.NewGuid().ToString();
+
+            var hashToken = Sha256Hash.Hash(token);
+            var hashRefreshToken = Sha256Hash.Hash(resfreshToken);
+
+            var device = GetUserDevice.DeviceName(HttpContext.Request.Headers["user-agent"]);
+
+            var command = new AddTokenCommand(user.Id, hashToken, hashRefreshToken, DateTime.Now.AddDays(7),
+                DateTime.Now.AddDays(8), device);
+
+            try
+            {
+                 await _userFacade.AddUserToken(command);
+            }
+            catch
+            {
+                throw new InvalidDataException("تعداد کاربران فعال فقط ۴ می باشد و بیشتر نمی توانند ورود کنند");
+            }
+
+            var result = new LoginResultDto()
+            {
+                RefreshToken = resfreshToken,
+                Token = token
+            };
+
+            return result;
+        }
     }
 }
+

@@ -14,14 +14,13 @@ namespace Crm.Application.User.AddToken
 
         public async Task Handle(AddTokenCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(request.UsersId);
+            var user = await _userRepository.GetTracking(request.UsersId);
             if (user == null)
                 throw new InvalidDataException("چنین کاربری وجود ندارد");
 
             user.AddToken(request.HashJwtToken, request.HashRefreshToken, request.ExpireToken,
                 request.ExpireRefreshToken, request.Device);
 
-            _userRepository.Update(user);
             await _userRepository.Save();
         }
     }

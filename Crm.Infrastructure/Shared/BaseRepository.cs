@@ -21,7 +21,11 @@ namespace Crm.Infrastructure.Shared
         {
             await _context.AddAsync(entity);
         }
+        public async Task<TEntity?> GetTracking(long id)
+        {
+            return await _context.Set<TEntity>().AsTracking().FirstOrDefaultAsync(t => t.Id == id);
 
+        }
         public TEntity? Get(long id)
         {
             return  _context.Set<TEntity>().FirstOrDefault(t => t.Id == id); 
