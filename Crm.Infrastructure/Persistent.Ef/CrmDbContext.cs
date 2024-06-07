@@ -23,6 +23,5 @@ namespace Crm.Infrastructure.Persistent.Ef
 
         public DbSet<Users> Users { get; set; }
         public DbSet<Tickets> Tickets { get; set; }
-        public DbSet<TicketDetail> TicketDetails { get; set; }
     }
 }

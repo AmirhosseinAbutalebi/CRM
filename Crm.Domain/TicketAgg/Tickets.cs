@@ -25,7 +25,7 @@ namespace Crm.Domain.TicketAgg
         
         public string Description { get; private set; }
 
-        public ICollection<TicketDetail> Items { get; private set; }
+        public ICollection<TicketDetail> Items { get; }
 
         public StatusTicket StatusTicket { get; private set; }
 

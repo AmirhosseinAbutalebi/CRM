@@ -1,4 +1,5 @@
-﻿using Crm.Application.User.Register;
+﻿using Crm.Application.User.AddToken;
+using Crm.Application.User.Register;
 using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetStudent;
 using Crm.Query.Users.GetTeacher;
@@ -19,6 +20,10 @@ namespace Crm.Presentation.Facade.User
         public async Task RegisterUser(RegisterUserCommand user)
         {
             await _mediator.Send(user);
+        }
+        public async Task AddUserToken(AddTokenCommand token)
+        {
+            await _mediator.Send(token);
         }
 
         public async Task<List<UserDto>> GetAll()

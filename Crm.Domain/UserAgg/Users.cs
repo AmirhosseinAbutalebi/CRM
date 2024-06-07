@@ -11,6 +11,7 @@ namespace Crm.Domain.UserAgg
             FirstName = firstName;
             LastName = lastName;
             Role = role;
+            Tokens = new List<UserToken>();
         }
         private Users()
         {
@@ -21,6 +22,17 @@ namespace Crm.Domain.UserAgg
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public LevelUser Role { get; private set; }
+        public ICollection<UserToken> Tokens { get; }
 
+        public void AddToken(string hashJwtToken, string hashRefreshToken, DateTime expireToken, DateTime expireRefreshToken, string device)
+        {
+            var activeTokenCount = Tokens.Count(c=> c.ExpireRefreshToken > DateTime.Now);
+            if (activeTokenCount > 3)
+                throw new InvalidDataException("فقط سه کاربر به طور همزمان می توانند لاگین کنند");
+
+            var token = new UserToken(hashJwtToken, hashRefreshToken, expireToken, expireRefreshToken, device);
+            token.UsersId = Id;
+            Tokens.Add(token);
+        }
     }
 }
