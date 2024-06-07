@@ -31,28 +31,5 @@ namespace Crm.Config
             service.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
             service.FacadeDependency();
         }
-        public static void AuthenticationJWT(WebApplicationBuilder builder)
-        {
-            builder.Services.AddAuthentication(option =>
-            {
-                option.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(option =>
-            {
-                option.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    IssuerSigningKey =
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:SignInKey"])),
-                    ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
-                    ValidAudience = builder.Configuration["JwtConfig:Audience"],
-                    ValidateLifetime = true,
-                    ValidateIssuer = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = true
-                };
-                option.SaveToken = true;
-            });
-        }
     }
 }

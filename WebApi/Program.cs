@@ -1,4 +1,5 @@
 using Crm.Config;
+using WebApi.Common.JwtConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,8 @@ builder.Services.AddSwaggerGen();
 BootstrapperConfig.DependencyInjectionConfig
     (builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
 
-BootstrapperConfig.AuthenticationJWT(builder);
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddTransient<CustomJwtValidation>();
 
 var app = builder.Build();
 

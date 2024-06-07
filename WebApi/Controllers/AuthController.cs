@@ -12,6 +12,8 @@ using WebApi.Common.GetDevice;
 using Crm.Application.User.RemoveToken;
 using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetUserById;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
@@ -59,6 +61,24 @@ namespace WebApi.Controllers
             var command = new RegisterUserCommand(view.Username, view.Password, view.FirstName, view.LastName, view.Role);
             await _userFacade.RegisterUser(command);
             return Ok("کاربر با موفقیت ایجاد شد");
+        }
+
+        
+        [Authorize]
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var jwtToken = await HttpContext.GetTokenAsync("access_token");
+            var result = await _userFacade.GetUserByToken(jwtToken);
+
+            if (result == null)
+                return NotFound("چنین کاربری یافت نشده است");
+
+            var token = new RemoveTokenCommand(result.UsersId, result.Id);
+
+            await _userFacade.RemoveUserToken(token);
+
+            return Ok();
         }
 
         [HttpPost("RefreshToken")]

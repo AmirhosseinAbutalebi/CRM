@@ -3,7 +3,7 @@ using Crm.Query.Users.DTOs;
 using Dapper;
 using MediatR;
 
-namespace Crm.Query.Users.UserToken
+namespace Crm.Query.Users.UserToken.GetUserByRefreshToken
 {
     internal class GetUserTokenByRefreshTokenQueryHandler : IRequestHandler<GetUserTokenByRefreshTokenQuery, UserTokenDto>
     {
@@ -18,8 +18,8 @@ namespace Crm.Query.Users.UserToken
         {
             using var connection = _dapperContext.CreateConnection();
             var sql = $"select top(1) * from {_dapperContext.UserToken} where HashRefreshToken = @hashRefreshToken";
-            return await connection.QueryFirstOrDefaultAsync<UserTokenDto>(sql, new { hashRefreshToken = request.HashRefreshToken});
-             
+            return await connection.QueryFirstOrDefaultAsync<UserTokenDto>(sql, new { hashRefreshToken = request.HashRefreshToken });
+
         }
     }
 }

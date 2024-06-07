@@ -7,7 +7,8 @@ using Crm.Query.Users.GetStudent;
 using Crm.Query.Users.GetTeacher;
 using Crm.Query.Users.GetUserById;
 using Crm.Query.Users.GetUsers;
-using Crm.Query.Users.UserToken;
+using Crm.Query.Users.UserToken.GetUserByRefreshToken;
+using Crm.Query.Users.UserToken.GetUserByToken;
 using MediatR;
 namespace Crm.Presentation.Facade.User
 {
@@ -54,6 +55,12 @@ namespace Crm.Presentation.Facade.User
         {
             var hashRefreshToken = Sha256Hash.Hash(refreshToken);
             return await _mediator.Send(new GetUserTokenByRefreshTokenQuery(hashRefreshToken));
+        }
+
+        public async Task<UserTokenDto> GetUserByToken(string jwtToken)
+        {
+            var hashJwtToken = Sha256Hash.Hash(jwtToken);
+            return await _mediator.Send(new GetUserByJwtTokenQuery(hashJwtToken));
         }
     }
 }
