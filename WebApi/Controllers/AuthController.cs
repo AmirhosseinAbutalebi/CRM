@@ -14,8 +14,6 @@ using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetUserById;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Net.Http.Headers;
 
 namespace WebApi.Controllers
 {
