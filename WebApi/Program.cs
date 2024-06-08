@@ -30,6 +30,11 @@ BootstrapperConfig.DependencyInjectionConfig
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddTransient<CustomJwtValidation>();
 
+builder.Services.AddStackExchangeRedisCache( option =>
+{
+    option.Configuration = "localhost:6379";
+});
+
 var app = builder.Build();
 
 

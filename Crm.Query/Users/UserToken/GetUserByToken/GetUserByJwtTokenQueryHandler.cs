@@ -17,9 +17,9 @@ namespace Crm.Query.Users.UserToken.GetUserByToken
         public async Task<UserTokenDto> Handle(GetUserByJwtTokenQuery request, CancellationToken cancellationToken)
         {
             using var connection = _dapperContext.CreateConnection();
-            var sql = $"select top(1) * from {_dapperContext.UserToken} where HashJwtToken=@hashJwtToken";
+            var sql = $"select top(1) * from {_dapperContext.UserToken} where HashJwtToken=@hashtoken";
             var result = await connection.QueryFirstOrDefaultAsync<UserTokenDto>
-                (sql, new { hasJwtToken = request.HashJwtToken});
+                (sql, new { hashtoken = request.HashJwtToken});
             return result;
         }
     }

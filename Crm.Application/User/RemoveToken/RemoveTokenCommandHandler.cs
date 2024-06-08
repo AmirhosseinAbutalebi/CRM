@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Crm.Application.User.RemoveToken
 {
-    internal class RemoveTokenCommandHandler : IRequestHandler<RemoveTokenCommand>
+    internal class RemoveTokenCommandHandler : IRequestHandler<RemoveTokenCommand, string>
     {
         private readonly IUserRepository _userRepository;
 
@@ -12,14 +12,15 @@ namespace Crm.Application.User.RemoveToken
             _userRepository = userRepository;
         }
 
-        public async Task Handle(RemoveTokenCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(RemoveTokenCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetTracking(request.UserId);
             if (user == null)
                 throw new InvalidDataException("چنین کاربری وجود ندارد");
-
-            user.removeToken(request.TokenId);
+            
+            var token = user.removeToken(request.TokenId);
             await _userRepository.Save();
+            return token;
         }
     }
 }

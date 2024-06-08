@@ -10,9 +10,9 @@ namespace Crm.Presentation.Facade.User
         Task AddUserToken(AddTokenCommand token);
         Task RemoveUserToken(RemoveTokenCommand token);
 
-        Task<UserDto> GetUserByUserId(long userId);
+        Task<UserDto?> GetUserByUserId(long userId);
         Task<UserTokenDto> GetUserByRefreshToken(string refreshToken);
-        Task<UserTokenDto> GetUserByToken(string jwtToken);
+        Task<UserTokenDto?> GetUserByToken(string jwtToken);
         Task<List<UserDto>> GetTeachers();
         Task<List<UserDto>> GetStudents();
         Task<List<UserDto>> GetAll();

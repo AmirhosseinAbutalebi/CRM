@@ -14,6 +14,8 @@ using Crm.Query.Users.DTOs;
 using Crm.Query.Users.GetUserById;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Net.Http.Headers;
 
 namespace WebApi.Controllers
 {
@@ -69,6 +71,9 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Logout()
         {
             var jwtToken = await HttpContext.GetTokenAsync("access_token");
+            if (jwtToken == null)
+                throw new InvalidDataException("token not found");
+
             var result = await _userFacade.GetUserByToken(jwtToken);
 
             if (result == null)

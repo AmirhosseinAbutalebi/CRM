@@ -35,12 +35,13 @@ namespace Crm.Domain.UserAgg
             Tokens.Add(token);
         }
 
-        public void removeToken(long id)
+        public string removeToken(long id)
         {
             var token = Tokens.FirstOrDefault(t=> t.Id == id);
             if (token == null)
                 throw new InvalidDataException("چنین توکنی وجود ندارد");
             Tokens.Remove(token);
+            return token.HashJwtToken;
         }
     }
 }
