@@ -27,7 +27,7 @@ namespace WebApi.Controllers
             await _ticketDetailFacade.UpdateTicketDetailToRead(command);
             return Ok();
         }
-        [HttpGet("GetListTicketDetail")]
+        [HttpGet("GetListTicketDetail/{ticketId}")]
         public async Task<List<TicketDetailDto>> GetTicketDetail(long ticketId)
         {
             return await _ticketDetailFacade.GetTicketDetail(ticketId);

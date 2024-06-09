@@ -85,7 +85,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("RefreshToken")]
-        public async Task<IActionResult> RefreshToken([FromBody]string refreshToken)
+        public async Task<IActionResult> RefreshToken(string refreshToken)
         {
             
             var result = await _userFacade.GetUserByRefreshToken(refreshToken);
@@ -118,8 +118,13 @@ namespace WebApi.Controllers
             var hashToken = Sha256Hash.Hash(token);
             var hashRefreshToken = Sha256Hash.Hash(resfreshToken);
 
-            var device = GetUserDevice.DeviceName(HttpContext.Request.Headers["user-agent"]);
 
+            var device = "";
+            var header = HttpContext.Request.Headers["user-agent"].ToString();
+            if (header != null)
+                device = GetUserDevice.DeviceName(header);
+            else
+                device = "";
             var command = new AddTokenCommand(user.Id, hashToken, hashRefreshToken, DateTime.Now.AddDays(7),
                 DateTime.Now.AddDays(8), device);
 

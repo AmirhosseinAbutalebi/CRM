@@ -14,8 +14,8 @@ namespace WebApi.Controllers
         {
             _userFacade = userFacade;
         }
-        [HttpGet("GetUserByUserId")]
-        public async Task<UserDto> GetUserByUserId(long userId)
+        [HttpGet("GetUserByUserId/{userId}")]
+        public async Task<UserDto?> GetUserByUserId(long userId)
         {
             return await _userFacade.GetUserByUserId(userId);
         }
